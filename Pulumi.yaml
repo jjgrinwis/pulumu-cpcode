@@ -1,0 +1,6 @@
+name: cpcode
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A Python Pulumi program to create a new cpcode resource
