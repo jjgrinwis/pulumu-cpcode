@@ -5,7 +5,7 @@ import pulumi_akamai as akamai
 
 # should use ENV to share between stacks
 group_name = "GSS Training Internal-C-1IE2OHM"
-cpcode_name = "jgrinwis-pristine"
+cpcode_name = "jgrinwis-pulumi"
 
 # we can export it or re-query it again
 contract_id = akamai.get_contracts().contracts[0].contract_id
@@ -31,20 +31,15 @@ products = {
 # https://registry.terraform.io/providers/akamai/akamai/latest/docs/guides/appendix
 product_id = products[product]
 
-# cpcode = akamai.CpCode(
-#     cpcode_name,
-#     contract_id=contract_id,
-#     group_id=group_id,
-#     name=cpcode_name
-#     product=product_id
-# )
-
-# for now set it statically
-cpcode_id = 'cpc_763552'
+# create cpcode and using name as the export value in the next stack
+# https://www.pulumi.com/docs/reference/pkg/akamai/cpcode/
+cpcode = akamai.CpCode(
+    cpcode_name,
+    contract_id=contract_id,
+    group_id=group_id,
+    name=cpcode_name,
+    product=product_id
+)
 
 # share created vars with other stack so we don't need to recreate them
-# pulumi.export('cpcode_id', cpcode.id)
-# pulumi.export('cpcode_id', cpcode_id)
-# pulumi.export('product_id', product_id)
-# pulumi.export('group_name', group_name)
-pulumi.export('cpcode_name', cpcode_name)
+pulumi.export('cpcode_name', cpcode.name)
