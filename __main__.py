@@ -6,12 +6,16 @@ import pulumi_akamai as akamai
 # get information from our config file. 
 # use "pulumi config set <key> [value]" to set the value
 # Config is unique per project/stack. 
-# To create a new stack in a project use "pulumi stack init" and select it via "pulumi stack select"
+# To create a new stack in a project use "pulumi stack init" from project dir and select it via "pulumi stack select"
 config = pulumi.Config()
 group_name = config.require("group_name")
 cpcode_name = config.require("cpcode_name")
 
-# we can export it or re-query it again in other stack
+# first lookup contract_id and group_id as we need that info for every resource we create
+# to lookup available groups use "akamai pm lg"
+# as we're not waiting for a resource to get provisioned we should just wait for this call
+# let see if we can create an edgehostname without the pulumi.Output.from_input() for our first two calls
+# return types are "Awaitable" and will not create any resource
 contract_id = akamai.get_contracts().contracts[0].contract_id
 group_id = akamai.get_group(contract_id=contract_id, group_name=group_name).id
 
