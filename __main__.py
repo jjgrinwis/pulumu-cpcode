@@ -5,7 +5,8 @@ import pulumi_akamai as akamai
 
 # get information from our config file. 
 # use "pulumi config set <key> [value]" to set the value
-# Config is unique per stack to create new stack "pulumi stack init" and select it via "pulumi stack select"
+# Config is unique per project/stack. 
+# To create a new stack in a project use "pulumi stack init" and select it via "pulumi stack select"
 config = pulumi.Config()
 group_name = config.require("group_name")
 cpcode_name = config.require("cpcode_name")
