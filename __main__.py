@@ -1,11 +1,14 @@
-"""A Python Pulumi program"""
+"""A Python Pulumi program to create a cpcode"""
 
 import pulumi
 import pulumi_akamai as akamai
 
-# as a test set some static vars which could be shared between stacks.
-group_name = "GSS Training Internal-C-1IE2OHM"
-cpcode_name = "jgrinwis-pulumi"
+# get information from our config file. 
+# use "pulumi config set <key> [value]" to set the value
+# Config is unique per stack to create new stack "pulumi stack init" and select it via "pulumi stack select"
+config = pulumi.Config()
+group_name = config.require("group_name")
+cpcode_name = config.require("cpcode_name")
 
 # we can export it or re-query it again in other stack
 contract_id = akamai.get_contracts().contracts[0].contract_id
