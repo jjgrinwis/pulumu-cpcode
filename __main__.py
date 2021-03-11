@@ -42,13 +42,17 @@ product_id = products[product]
 # create cpcode and using name as the export value in the next stack
 # https://www.pulumi.com/docs/reference/pkg/akamai/cpcode/
 # you can create a new cpcode but you can't remove it.
-cpcode = akamai.CpCode(
-    cpcode_name,
-    contract_id=contract_id,
-    group_id=group_id,
-    name=cpcode_name,
-    product=product_id
-)
+
+# cpcode = akamai.CpCode(
+#     cpcode_name,
+#     contract_id=contract_id,
+#     group_id=group_id,
+#     name=cpcode_name,
+#     product=product_id
+# )
+
+cpcode = "jgrinwis-pristine"
 
 # share created vars with other stack so we don't need to recreate them
-pulumi.export('cpcode_name', cpcode.name)
+#pulumi.export('cpcode_name', cpcode.name)
+pulumi.export('cpcode_name', cpcode)
