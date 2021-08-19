@@ -1,3 +1,4 @@
 config:
-  cpcode:cpcode_name: jgrinwis-pulumi
-  cpcode:group_name: GSS Training Internal-C-1IE2OHM
+  akamai:propertySection: pulumi-paul
+  cpcode:cpcode_name: pulumi
+  cpcode:group_name: pulumi
